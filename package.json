@@ -1,0 +1,22 @@
+{
+  "name": "back-logistech",
+  "version": "1.0.0",
+  "description": "API para gerenciar usuários, motoristas, administradores, pedidos, entregas e veículos na etapa last-mile. Desenvolvida com Node.js, Express e PostgreSQL, permite integração com painéis administrativos e apps de motoristas. Projeto acadêmico do SENAI.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Senai",
+    "Back",
+    "Api"
+  ],
+  "author": "Bernardo Marques",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
