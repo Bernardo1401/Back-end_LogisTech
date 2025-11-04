@@ -1,9 +1,9 @@
-const UserModel = require('../models/UserModel');
+const MotoristaModel = require('../models/MotoristaModel');
 
 // Buscar todos os motoristas
 const getAllMotoristas = async (req, res) => {
     try {
-        const users = await UserModel.getUsers();
+        const users = await MotoristaModel.getUsers();
         const motoristas = users.filter(user => user.funcao === 'MOTORISTA');
         res.json(motoristas);
     } catch (error) {
@@ -15,7 +15,7 @@ const getAllMotoristas = async (req, res) => {
 const getMotoristaById = async (req, res) => {
     const { id } = req.params;
     try {
-        const user = await UserModel.getUserById(id);
+        const user = await MotoristaModel.getUserById(id);
         if (!user) {
             return res.status(404).json({ error: 'Usuário não encontrado.' });
         }
@@ -49,7 +49,7 @@ const createMotorista = async (req, res) => {
         }
 
         // Criar motorista (função sempre será MOTORISTA)
-        const motorista = await UserModel.createUser(
+        const motorista = await MotoristaModel.createUser(
             nome, 
             email, 
             telefone, 
@@ -74,7 +74,7 @@ const updateMotorista = async (req, res) => {
         const { nome, email, telefone, senha } = req.body;
         
         // Verificar se o usuário existe e é motorista
-        const existingUser = await UserModel.getUserById(id);
+        const existingUser = await MotoristaModel.getUserById(id);
         if (!existingUser) {
             return res.status(404).json({ message: "Usuário não encontrado." });
         }
@@ -92,7 +92,7 @@ const updateMotorista = async (req, res) => {
             funcao: 'MOTORISTA'  // Manter sempre como MOTORISTA
         };
         
-        const motorista = await UserModel.updateUser(id, updateData);
+        const motorista = await MotoristaModel.updateUser(id, updateData);
         res.json(motorista);
     } catch (error) {
         if (error.code === '23505') { 
@@ -110,7 +110,7 @@ const deleteMotorista = async (req, res) => {
         const { id } = req.params;
         
         // Verificar se o usuário existe e é motorista
-        const existingUser = await UserModel.getUserById(id);
+        const existingUser = await MotoristaModel.getUserById(id);
         if (!existingUser) {
             return res.status(404).json({ error: "Usuário não encontrado." });
         }
@@ -119,7 +119,7 @@ const deleteMotorista = async (req, res) => {
             return res.status(404).json({ error: "Motorista não encontrado." });
         }
         
-        const result = await UserModel.deleteUser(id);
+        const result = await MotoristaModel.deleteUser(id);
         if (result.error) {
             return res.status(404).json(result);
         }

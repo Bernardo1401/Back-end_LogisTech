@@ -1,9 +1,9 @@
-const UserModel = require('../models/UserModel');
+const AdminModel = require('../models/AdminModel');
 
 // Buscar todos os administradores
 const getAllAdmins = async (req, res) => {
     try {
-        const users = await UserModel.getUsers();
+        const users = await AdminModel.getUsers();
         // Filtrar apenas os administradores
         const admins = users.filter(user => user.funcao === 'ADMIN');
         res.json(admins);
@@ -16,7 +16,7 @@ const getAllAdmins = async (req, res) => {
 const getAdminById = async (req, res) => {
     const { id } = req.params;
     try {
-        const user = await UserModel.getUserById(id);
+        const user = await AdminModel.getUserById(id);
         if (!user) {
             return res.status(404).json({ error: 'Usuário não encontrado.' });
         }
@@ -50,7 +50,7 @@ const createAdmin = async (req, res) => {
         }
 
         // Criar administrador (função sempre será ADMIN)
-        const admin = await UserModel.createUser(
+        const admin = await AdminModel.createUser(
             nome, 
             email, 
             telefone, 
@@ -75,7 +75,7 @@ const updateAdmin = async (req, res) => {
         const { nome, email, telefone, senha } = req.body;
         
         // Verificar se o usuário existe e é administrador
-        const existingUser = await UserModel.getUserById(id);
+        const existingUser = await AdminModel.getUserById(id);
         if (!existingUser) {
             return res.status(404).json({ message: "Usuário não encontrado." });
         }
@@ -93,7 +93,7 @@ const updateAdmin = async (req, res) => {
             funcao: 'ADMIN'  // Manter sempre como ADMIN
         };
         
-        const admin = await UserModel.updateUser(id, updateData);
+        const admin = await AdminModel.updateUser(id, updateData);
         res.json(admin);
     } catch (error) {
         if (error.code === '23505') { 
@@ -111,7 +111,7 @@ const deleteAdmin = async (req, res) => {
         const { id } = req.params;
         
         // Verificar se o usuário existe e é administrador
-        const existingUser = await UserModel.getUserById(id);
+        const existingUser = await AdminModel.getUserById(id);
         if (!existingUser) {
             return res.status(404).json({ error: "Usuário não encontrado." });
         }
@@ -120,7 +120,7 @@ const deleteAdmin = async (req, res) => {
             return res.status(404).json({ error: "Administrador não encontrado." });
         }
         
-        const result = await UserModel.deleteUser(id);
+        const result = await AdminModel.deleteUser(id);
         if (result.error) {
             return res.status(404).json(result);
         }
