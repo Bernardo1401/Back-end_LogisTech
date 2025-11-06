@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const veiculoController = require("../controllers/veiculoController.js"); // Alterado
+const veiculoController = require("../controllers/veiculoController.js");
 
-// Rotas para Veículos
+
 router.get("/veiculos", veiculoController.getAllVeiculos);
 router.get("/veiculos/:id", veiculoController.getVeiculoById);
 router.post("/veiculos", veiculoController.createVeiculo);

@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-// 1. Importar o controller de pedidos
-const pedidosController = require("../controllers/PedidosController"); // Ajuste o caminho se necessário
+const pedidosController = require("../controllers/pedidocontroller"); 
 
-// 2. Definir as rotas para /pedidos
+
 router.get("/pedidos", pedidosController.getAllPedidos);
 router.get("/pedidos/:id", pedidosController.getPedidoById);
 router.post("/pedidos", pedidosController.createPedido);
